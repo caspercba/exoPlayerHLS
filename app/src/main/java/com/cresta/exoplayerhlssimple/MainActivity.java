@@ -1,9 +1,7 @@
 package com.cresta.exoplayerhlssimple;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
