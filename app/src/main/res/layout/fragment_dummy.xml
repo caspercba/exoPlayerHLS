@@ -8,8 +8,10 @@
     android:background="#FF00FF00">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:id="@+id/rectangle"
+        android:layout_height="match_parent"
         android:background="#FFFF0000"/>
 
 </LinearLayout>
