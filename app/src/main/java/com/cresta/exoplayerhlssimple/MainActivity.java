@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * Created by Gaspar de Elias (gaspar.deelias@cresta.com.ar)
+ */
 public class MainActivity extends FragmentActivity {
 
     @Override

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 
 /**
- * Created by Gaspar de Elias on 29/07/15.
+ * Created by Gaspar de Elias (gaspar.deelias@cresta.com.ar) on 29/07/15.
  */
 public class DummyFragment extends Fragment {
     @Override

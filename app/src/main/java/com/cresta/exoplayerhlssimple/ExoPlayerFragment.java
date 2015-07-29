@@ -18,8 +18,9 @@ import butterknife.ButterKnife;
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * Created by Gaspar de Elias (gaspar.deelias@cresta.com.ar)
  */
+
 public class ExoPlayerFragment extends Fragment {
 
     private static final String TAG = ExoPlayerFragment.class.getSimpleName();
