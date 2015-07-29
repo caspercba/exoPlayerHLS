@@ -182,7 +182,6 @@ public class DemoPlayer implements ExoPlayer.Listener, ChunkSampleSource.EventLi
   private int videoTrackToRestore;
 
   private BandwidthMeter bandwidthMeter;
-  private MultiTrackChunkSource[] multiTrackSources;
   private String[][] trackNames;
   private int[] selectedTracks;
   private boolean backgrounded;
@@ -254,7 +253,6 @@ public class DemoPlayer implements ExoPlayer.Listener, ChunkSampleSource.EventLi
       return;
     }
     selectedTracks[type] = index;
-    pushTrackSelection(type, true);
   }
 
   public void setBackgrounded(boolean backgrounded) {
@@ -280,7 +278,6 @@ public class DemoPlayer implements ExoPlayer.Listener, ChunkSampleSource.EventLi
     }
     videoFormat = null;
     videoRenderer = null;
-    multiTrackSources = null;
     rendererBuildingState = RENDERER_BUILDING_STATE_BUILDING;
     maybeReportPlayerState();
     builderCallback = new InternalRendererBuilderCallback();
@@ -317,11 +314,8 @@ public class DemoPlayer implements ExoPlayer.Listener, ChunkSampleSource.EventLi
         ? ((MediaCodecTrackRenderer) videoRenderer).codecCounters
         : renderers[TYPE_AUDIO] instanceof MediaCodecTrackRenderer
         ? ((MediaCodecTrackRenderer) renderers[TYPE_AUDIO]).codecCounters : null;
-    this.multiTrackSources = multiTrackSources;
     this.bandwidthMeter = bandwidthMeter;
     pushSurface(false);
-    pushTrackSelection(TYPE_VIDEO, true);
-    pushTrackSelection(TYPE_AUDIO, true);
     player.prepare(renderers);
     rendererBuildingState = RENDERER_BUILDING_STATE_BUILT;
   }
@@ -576,27 +570,6 @@ public class DemoPlayer implements ExoPlayer.Listener, ChunkSampleSource.EventLi
     } else {
       player.sendMessage(
           videoRenderer, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, surface);
-    }
-  }
-
-  private void pushTrackSelection(int type, boolean allowRendererEnable) {
-    if (multiTrackSources == null) {
-      return;
-    }
-
-    int trackIndex = selectedTracks[type];
-    if (trackIndex == DISABLED_TRACK) {
-      player.setRendererEnabled(type, false);
-    } else if (multiTrackSources[type] == null) {
-      player.setRendererEnabled(type, allowRendererEnable);
-    } else {
-      boolean playWhenReady = player.getPlayWhenReady();
-      player.setPlayWhenReady(false);
-      player.setRendererEnabled(type, false);
-      player.sendMessage(multiTrackSources[type], MultiTrackChunkSource.MSG_SELECT_TRACK,
-          trackIndex);
-      player.setRendererEnabled(type, allowRendererEnable);
-      player.setPlayWhenReady(playWhenReady);
     }
   }
 
