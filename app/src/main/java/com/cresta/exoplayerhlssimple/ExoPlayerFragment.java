@@ -2,12 +2,14 @@ package com.cresta.exoplayerhlssimple;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import com.cresta.exoplayerhlssimple.exoplayer.DemoPlayer;
 import com.cresta.exoplayerhlssimple.exoplayer.HlsRendererBuilder;
+import com.google.android.exoplayer.AspectRatioFrameLayout;
 import com.google.android.exoplayer.audio.AudioCapabilities;
 import com.google.android.exoplayer.audio.AudioCapabilitiesReceiver;
 
@@ -26,11 +28,12 @@ public class ExoPlayerFragment extends Fragment {
     private boolean mNeedsPrepare;
     private String mUrl = "http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch1/appleman.m3u8";
 
-    private HlsRendererBuilder mHlsRendererBulder;
     private AudioCapabilitiesReceiver mAudioCapabilitiesReceiver;
     private AudioCapabilities mAudioCapabilities;
 
     @Bind(R.id.surface_view) SurfaceView mSurface;
+
+    @Bind(R.id.video_frame) AspectRatioFrameLayout mVideoFrame;
 
     public ExoPlayerFragment() {
 
@@ -53,12 +56,14 @@ public class ExoPlayerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mAudioCapabilitiesReceiver.register();
         preparePlayer();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        mAudioCapabilitiesReceiver.unregister();
     }
 
 
@@ -108,12 +113,12 @@ public class ExoPlayerFragment extends Fragment {
 
         @Override
         public void onError(Exception e) {
-
         }
 
         @Override
         public void onVideoSizeChanged(int width, int height, float pixelWidthHeightRatio) {
-
+            Log.d(TAG, "onVideoSizeChanged: width:" + width + ", height:" + height + ", ratio:" + pixelWidthHeightRatio);
+            mVideoFrame.setAspectRatio(height == 0 ? 1 : (width * pixelWidthHeightRatio) / height);
         }
     };
 
