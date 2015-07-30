@@ -2,4 +2,15 @@
     <string name="app_name">ExoPlayer HLS Simple</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="livestream_status_starting_soon">Live stream starting soon</string>
+    <string name="livestream_status_no_stream">No live stream happening right now</string>
+    <string name="error_video_player_failed">Failed to load video</string>
+    <string name="livestream_status_buffering">Buffering...</string>
+
+    <string-array name="debugLogLevel">
+        <item>ERROR</item>
+        <item>DEBUG</item>
+        <item>VERBOSE</item>
+    </string-array>
 </resources>

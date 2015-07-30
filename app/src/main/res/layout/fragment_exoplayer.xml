@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context=".MainActivityFragment"
     android:background="#FF000000">
@@ -13,6 +13,76 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <ProgressBar
+                android:id="@+id/bufferingProgress"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:indeterminate="true"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/playerInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFFFF"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/debugBlock"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="#33000000"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/playerDebugText"
+                android:textColor="#FFFFFF00"
+                android:textSize="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:background="#55000000">
+                <TextView
+                    android:text="LogLevel:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="#FFFF0000"/>
+                <Spinner
+                    android:id="@+id/logLevelSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#5500F0FF" />
+
+                <CheckBox
+                    android:id="@+id/playerDebugCheck"
+                    android:text="showLogs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFF0000"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </com.google.android.exoplayer.AspectRatioFrameLayout>
 
-</RelativeLayout>
+
+
+</FrameLayout>
